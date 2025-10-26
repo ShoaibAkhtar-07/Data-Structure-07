@@ -9,7 +9,7 @@ void travesal(int arr[],int size){
 
 //Function for insertion
 int insertion(int arr[],int capacity, int size, int index, int element){
-    if(size >= capacity){
+    if(size >= capacity || index < 0 || index > size){
         return -1;
     }
     else{
