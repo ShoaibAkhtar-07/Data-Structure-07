@@ -1,15 +1,15 @@
 #include<stdio.h>
 
-// Function for traversal of Array
+// Function for Traversal of Array
 void travesal(int arr[],int size){
     for(int i = 0; i<size; i++){
         printf("%d  ",arr[i]);
     }
 }
 
-//Function for insertion
+//Function for Insertion
 int insertion(int arr[],int capacity, int size, int index, int element){
-    if(size >= capacity || index < 0 || index > size){
+    if(size >= capacity ||index < 0 || index > size){
         return -1;
     }
     else{
@@ -17,6 +17,19 @@ int insertion(int arr[],int capacity, int size, int index, int element){
             arr[i+1] = arr[i];
         }
         arr[index] = element;
+        return 1;
+    }
+}
+
+// Function for Deletion 
+int deletion(int arr[],int size, int index){
+    if(index < 0 || index >= size){
+        return -1;
+    }
+    else{
+        for (int i = index; i < size-1 ; i++){
+            arr[i] = arr[i+1];
+        }
         return 1;
     }
 }
@@ -34,10 +47,15 @@ int main()
         size ++;
         printf("After INSERTION\n");
         travesal(arr,size);
-        printf("\nInsertion successfully done!");
+        printf("\nInsertion successfully done!\n");
     }
     else{
-        printf(" error! occured insertion not successful");
+        printf(" error! occured insertion not successful\n");
     };
+
+    printf("\n--Deletion--\n");
+    deletion(arr,size,0);
+    size--;
+    travesal(arr,size);
     return 0;
 }
