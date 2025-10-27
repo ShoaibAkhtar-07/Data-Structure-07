@@ -41,7 +41,23 @@ struct Node *InsertionAtMiddle(struct Node *head, int data, int index)
     ptr->next = p->next;
     p->next = ptr;
     return head;
-};
+}
+
+// INSERSION at the END
+struct Node *InsertionAtEnd(struct Node *head, int data)
+{
+    struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
+    struct Node *p = head;
+    ptr->data = data;
+    int i = 0;
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    p->next = ptr;
+    ptr->next = NULL;
+    return head;
+}
 
 int main()
 {
@@ -69,14 +85,17 @@ int main()
 
     printf("---Before INSERTION---\n");
     LinkedListTraversal(head);
-    printf("\n");
 
     head = InsertionAtFirst(head, 10);
-    printf("---After INSERTION at the BEGINNING---\n");
+    printf("\n---After INSERTION at the BEGINNING---\n");
     LinkedListTraversal(head);
 
-    head = InsertionAtMiddle(head, 22,2);
-    printf("---After INSERTION at MIDDLE---\n");
+    head = InsertionAtMiddle(head, 22, 2);
+    printf("\n---After INSERTION at MIDDLE---\n");
+    LinkedListTraversal(head);
+
+    head = InsertionAtEnd(head, 100);
+    printf("\n---After INSERTION at the End---\n");
     LinkedListTraversal(head);
 
     return 0;
