@@ -49,6 +49,51 @@ struct Node *DeletionInMiddle(struct Node *head, int index)
     return head;
 }
 
+// DELETION at the END
+struct Node *DeletionAtEnd(struct Node *head)
+{
+    struct Node *p = head;
+    struct Node *q = head->next;
+    while (q->next != NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    p->next = NULL;
+    free(q);
+    return head;
+}
+
+// DELETION by VALUE
+struct Node *DeletionByValue(struct Node *head, int value)
+{
+    if (head == NULL)
+        return NULL;
+    //--2
+    if (head->data == value)
+    {
+        struct Node *temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    //--2
+    struct Node *p = head;
+    struct Node *q = head->next;
+    while (q != NULL && q->data != value)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    if (q != NULL)
+    {
+        p->next = q->next;
+        free(q);
+    }
+    return head;
+}
+
+
 int main()
 {
     struct Node *head;
@@ -61,19 +106,17 @@ int main()
     third = (struct Node *)malloc(sizeof(struct Node));
     fourth = (struct Node *)malloc(sizeof(struct Node));
 
-
     head->data = 111;
     head->next = second;
 
     second->data = 111;
     second->next = third;
-    
+
     third->data = 222;
     third->next = fourth;
 
     fourth->data = 333;
     fourth->next = NULL;
-
 
     printf("---BEFORE DELETION---\n");
     LinkedList(head);
@@ -83,7 +126,15 @@ int main()
     LinkedList(head);
 
     printf("\n---AFTER DELETION in MIDDLE---\n");
-    head = DeletionInMiddle(head,1);
+    head = DeletionInMiddle(head, 1);
+    LinkedList(head);
+
+    printf("\n---AFTER DELETION at the END---\n");
+    head = DeletionAtEnd(head);
+    LinkedList(head);
+
+    printf("\n---AFTER DELETION by the VALUE---\n");
+    head = DeletionByValue(head, 111);
     LinkedList(head);
 
     return 0;
