@@ -77,6 +77,19 @@ int peek(struct stack *ptr, int i)
     }
 }
 
+// STACKBOTTOM
+int stackbottom(struct stack *ptr)
+{
+    return ptr->arr[0];
+}
+
+// STACKTOP
+int stacktop(struct stack *ptr)
+{
+    return ptr->arr[ptr->top];
+}
+
+
 int main()
 {
     struct stack *s = (struct stack *)malloc(sizeof(struct stack));
@@ -105,8 +118,11 @@ int main()
         printf("At position %d the Value %d\n", i, peek(s, i));
     }
 
-    printf("%d\n",peek(s,0));
-    printf("%d\n",peek(s,11));
+    printf("%d\n", peek(s, 0));
+    printf("%d\n", peek(s, 11));
+
+    printf("The value at BOTTOM of the STACK is :  %d\n", stackbottom(s));
+    printf("The value at the TOP of the STACK is :  %d\n", stacktop(s));
 
     return 0;
 }
