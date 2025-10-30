@@ -66,7 +66,7 @@ int pop(struct stack *ptr)
 // PEEK Operation in STACK
 int peek(struct stack *ptr, int i)
 {
-    if (ptr->top - i + 1 < 0)
+    if (i <= 0 || ptr->top - i + 1 < 0)
     {
         printf("---Invalid index---\n");
         return -1;
@@ -104,6 +104,9 @@ int main()
     {
         printf("At position %d the Value %d\n", i, peek(s, i));
     }
+
+    printf("%d\n",peek(s,0));
+    printf("%d\n",peek(s,11));
 
     return 0;
 }
