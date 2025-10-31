@@ -24,6 +24,9 @@ int isEmpty(struct Node *top)
     {
         return 1;
     }
+    else{
+        return 0;
+    }
 }
 
 // Checking whether the STACK is FULL or NOT
@@ -57,10 +60,34 @@ struct Node *push(struct Node *top, int x)
     }
 }
 
+// POPPING a value from stack
+int pop(struct Node** top)
+{
+    if (isEmpty(*top))
+    {
+        printf("---STACK UNDERFLOW---\n");
+    }
+    else
+    {
+        struct Node *p = *top;
+        *top = (*top)->next;
+        int x = p->data;
+        free(p);
+        return x;
+    }
+}
+
 int main()
 {
     struct Node *top = NULL;
     top = push(top, 90);
+    top = push(top, 190);
+    top = push(top, 290);
+    top = push(top, 390);
     linkedListTraversal(top);
+    printf("The popped element is : %d\n", pop(&top));
+    linkedListTraversal(top);
+
+
     return 0;
 }
