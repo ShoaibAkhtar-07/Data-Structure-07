@@ -47,13 +47,13 @@ int isFull(struct Node *top)
 // PUSHING a value in STACK
 struct Node *push(struct Node *top, int x)
 {
-    if (isFull(top))
+    struct Node *n = (struct Node *)malloc(sizeof(struct Node));
+    if (n == NULL)
     {
         printf("---STACK OVERFLOW---\n");
     }
     else
     {
-        struct Node *n = (struct Node *)malloc(sizeof(struct Node));
         n->data = x;
         n->next = top;
         top = n;
@@ -67,12 +67,13 @@ int pop(struct Node **top)
     if (isEmpty(*top))
     {
         printf("---STACK UNDERFLOW---\n");
+        return -1;
     }
     else
     {
         struct Node *p = *top;
-        *top = (*top)->next;
         int x = p->data;
+        *top = (*top)->next;
         free(p);
         return x;
     }
@@ -106,6 +107,11 @@ int stacktop(struct Node *top)
 int stackbottom(struct Node *top)
 {
     struct Node *ptr = top;
+    if (ptr == NULL)
+    {
+        printf("---STACK is EMPTY---\n");
+        return -1;
+    }
     while (ptr->next != NULL)
     {
         ptr = ptr->next;
