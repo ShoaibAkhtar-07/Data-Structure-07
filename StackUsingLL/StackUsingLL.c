@@ -121,7 +121,7 @@ int stackbottom(struct Node *top)
 
 int main()
 {
-    struct Node *top = NULL;
+    struct Node **top = NULL;
     top = push(top, 90);
     top = push(top, 190);
     top = push(top, 290);
