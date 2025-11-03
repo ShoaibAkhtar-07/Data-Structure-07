@@ -63,6 +63,24 @@ char pop(struct stack *ptr)
     }
 }
 
+// checking match case
+int match(char a, char b)
+{
+    if (a == '(' && b == ')')
+    {
+        return 1;
+    }
+    if (a == '[' && b == ']')
+    {
+        return 1;
+    }
+    if (a == '{' && b == '}')
+    {
+        return 1;
+    }
+    return 0;
+}
+
 // Parenthesis Checking Using Stack
 int ParenthesicMatch(char *exp)
 {
@@ -70,19 +88,24 @@ int ParenthesicMatch(char *exp)
     s->size = strlen(exp);
     s->top = -1;
     s->arr = (char *)malloc(s->size * sizeof(char));
-    for (int i = 0; i < exp[i] != '\0'; i++)
+    char popped_char;
+    for (int i = 0; exp[i] != '\0'; i++)
     {
-        if (exp[i] == '(')
+        if (exp[i] == '(' || exp[i] == '[' || exp[i] == '{')
         {
-            push(s, '(');
+            push(s, exp[i]);
         }
-        else if (exp[i] == ')')
+        else if (exp[i] == ')' || exp[i] == ']' || exp[i] == '}')
         {
             if (isEmpty(s))
             {
                 return 0;
             }
-            pop(s);
+            popped_char = pop(s);
+            if (!match(popped_char, exp[i]))
+            {
+                return 0;
+            }
         }
     }
     if (isEmpty(s))
