@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 struct stack
 {
     int size;
@@ -63,13 +64,47 @@ char pop(struct stack *ptr)
 }
 
 // Parenthesis Checking Using Stack
-
+int ParenthesicMatch(char *exp)
+{
+    struct stack *s = (struct stack *)malloc(sizeof(struct stack));
+    s->size = strlen(exp);
+    s->top = -1;
+    s->arr = (char *)malloc(s->size * sizeof(char));
+    for (int i = 0; i < exp[i] != '\0'; i++)
+    {
+        if (exp[i] == '(')
+        {
+            push(s, '(');
+        }
+        else if (exp[i] == ')')
+        {
+            if (isEmpty(s))
+            {
+                return 0;
+            }
+            pop(s);
+        }
+    }
+    if (isEmpty(s))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 int main()
 {
-    struct stack *s;
-    s->size = 10;
-    s->top = -1;
-    s->arr = (char *)malloc(s->size * (sizeof(char)));
+    char *exp = "1*4-3(8/2)";
+    if (ParenthesicMatch(exp))
+    {
+        printf("---Parenthesic MATCHED---\n");
+    }
+    else
+    {
+        printf("---Parenthesic NOT MATCHED----\n");
+    }
     return 0;
 }
