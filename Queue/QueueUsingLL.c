@@ -9,6 +9,7 @@ struct Node
 struct Node *front = NULL;
 struct Node *rear = NULL;
 
+// Queue Display function
 void LLTraversal(struct Node *ptr)
 {
     while (ptr != NULL)
@@ -18,6 +19,7 @@ void LLTraversal(struct Node *ptr)
     }
 }
 
+// Enqueue function
 void enqueue(int val)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
@@ -41,12 +43,13 @@ void enqueue(int val)
     }
 }
 
+// Dequeue function
 int dequeue()
 {
     struct Node *ptr = front;
     if (front == NULL)
     {
-        printf("--Queue UnderFlow--\n");
+        printf("--Queue UnderFlow/Empty--\n");
         return -1;
     }
     else
